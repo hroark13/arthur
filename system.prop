@@ -1,0 +1,15 @@
+#
+# system.prop for arthur
+#
+
+rild.libpath=/system/lib/libril-qc-1.so
+rild.libargs=-d /dev/smd0
+ro.telephony.default_network=4
+DEVICE_PROVISIONED=1
+
+dalvik.vm.heapsize=32m
+ro.sf.lcd_density=240
+ro.sf.hwrotation=180
+
+ro.setupwizard.mode=DISABLED
+dalvik.vm.stack-trace-file=/data/anr/traces.txt
