@@ -18,31 +18,25 @@ DEVICE_PACKAGE_OVERLAYS += device/zte/arthur/overlay
 PRODUCT_COPY_FILES += \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
+# we have enough storage space to hold precise GC data
+PRODUCT_TAGS += dalvik.gc.type-precise
+
+# use high-density artwork where available
+PRODUCT_LOCALES += hdpi
+
+
 PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
-    MagicSmokeWallpapers \
-    VisualizationWallpapers \
     librs_jni \
-    Gallery3d \
-    SpareParts \
-    Term \
-    overlay.default \
     abtfilt \
     gralloc.msm7x30 \
     lights.msm7x30 \
     copybit.msm7x30 \
+    overlay.msm7x30 \
     gps.msm7x30 \
     libOmxCore \
     libOmxVenc \
     libOmxVdec \
-    Torch \
-    dexpreopt \
-    Cyanbread \
     com.android.future.usb.accessory
-
-DISABLE_DEXPREOPT := false
 
 # Hardware properties
 PRODUCT_COPY_FILES += \
@@ -95,10 +89,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES +=\
     device/zte/arthur/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg \
     device/zte/arthur/prebuilt/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
+    device/zte/arthur/prebuilt/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \
     device/zte/arthur/prebuilt/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
     device/zte/arthur/prebuilt/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
     device/zte/arthur/prebuilt/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \
-    device/zte/arthur/prebuilt/lib/libgsl.so:system/lib/libgsl.so \
     device/zte/arthur/prebuilt/lib/libC2D2.so:system/lib/libC2D2.so \
     device/zte/arthur/prebuilt/lib/libOpenVG.so:system/lib/libOpenVG.so
 
@@ -142,29 +136,7 @@ PRODUCT_COPY_FILES+= \
     device/zte/arthur/prebuilt/lib/libril-qc-1.so:system/lib/libril-qc-1.so \
     device/zte/arthur/prebuilt/lib/libril-qc-qmi-1.so:system/lib/libril-qc-qmi-1.so \
     device/zte/arthur/prebuilt/lib/libril-qcril-hook-oem.so:system/lib/libril-qcril-hook-oem.so \
-    device/zte/arthur/prebuilt/lib/libnv.so:system/lib/libnv.so \
-    device/zte/arthur/prebuilt/lib/libqmi.so:/system/lib/libqmi.so \
-    device/zte/arthur/prebuilt/lib/libdsm.so:/system/lib/libdsm.so \
-    device/zte/arthur/prebuilt/lib/libqueue.so:/system/lib/libqueue.so \
-    device/zte/arthur/prebuilt/lib/libcm.so:/system/lib/libcm.so \
-    device/zte/arthur/prebuilt/lib/libmmgsdilib.so:/system/lib/libmmgsdilib.so \
-    device/zte/arthur/prebuilt/lib/libgsdi_exp.so:/system/lib/libgsdi_exp.so \
-    device/zte/arthur/prebuilt/lib/libgstk_exp.so:/system/lib/libgstk_exp.so \
-    device/zte/arthur/prebuilt/lib/libwms.so:/system/lib/libwms.so \
-    device/zte/arthur/prebuilt/lib/libwmsts.so:/system/lib/libwmsts.so \
-    device/zte/arthur/prebuilt/lib/libpbmlib.so:/system/lib/libpbmlib.so \
-    device/zte/arthur/prebuilt/lib/libdss.so:/system/lib/libdss.so \
-    device/zte/arthur/prebuilt/lib/libauth.so:/system/lib/libauth.so \
-
-
-# Gemini (proprietry)
-PRODUCT_COPY_FILES += \
-    device/zte/arthur/prebuilt/lib/libgemini.so:/system/lib/libgemini.so \
-
-# Camera (Proprietry)
-PRODUCT_COPY_FILES += \
-    device/zte/arthur/prebuilt/lib/libmmjpeg.so:/system/lib/libmmjpeg.so \
-    device/zte/arthur/prebuilt/lib/libmmipl.so:/system/lib/libmmipl.so \
+    device/zte/arthur/prebuilt/lib/libnv.so:system/lib/libnv.so
 
 #APN
 PRODUCT_COPY_FILES+= \
@@ -185,7 +157,6 @@ PRODUCT_COPY_FILES += \
     device/zte/arthur/prebuilt/lib/modules/libra.ko:system/lib/modules/libra.ko \
     device/zte/arthur/prebuilt/lib/modules/libra_ftm.ko:system/lib/modules/libra_ftm.ko \
     device/zte/arthur/prebuilt/lib/modules/librasdioif.ko:system/lib/modules/librasdioif.ko \
-    device/zte/arthur/prebuilt/lib/modules/libhwrpc.so:system/lib/modules/libhwrpc.so \
     device/zte/arthur/prebuilt/etc/firmware/wlan/cfg.dat:system/etc/firmware/wlan/cfg.dat \
     device/zte/arthur/prebuilt/etc/firmware/wlan/qcom_cfg.ini:system/etc/firmware/wlan/qcom_cfg.ini \
     device/zte/arthur/prebuilt/etc/firmware/wlan/qcom_fw.bin:system/etc/firmware/wlan/qcom_fw.bin \
@@ -212,9 +183,7 @@ PRODUCT_COPY_FILES += \
     device/zte/arthur/prebuilt/etc/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
     device/zte/arthur/prebuilt/bin/bt_testmode.sh:system/bin/bt_testmode.sh \
     device/zte/arthur/prebuilt/bin/sdptool:system/bin/sdptool \
-    device/zte/arthur/prebuilt/bin/init.btprop.sh:system/bin/init.btprop.sh \
-    device/zte/arthur/prebuilt/bin/btwlancoex:/system/bin/btwlancoex
-
+    device/zte/arthur/prebuilt/bin/init.btprop.sh:system/bin/init.btprop.sh
 
 #Other Stuff called in the init.arthur.rc and stuff
 PRODUCT_COPY_FILES+= \
@@ -240,101 +209,16 @@ PRODUCT_COPY_FILES+= \
     device/zte/arthur/prebuilt/bin/akmd8962:system/bin/akmd8962 \
     device/zte/arthur/prebuilt/bin/thermald:system/bin/thermald \
     device/zte/arthur/prebuilt/etc/thermald.conf:system/etc/thermald.conf \
-    device/zte/arthur/prebuilt/lib/hw/sensors.default.so:system/lib/hw/sensors.arthur.so \
-    device/zte/arthur/prebuilt/lib/libsensorservice.so:/system/lib/libsensorservice.so
+    device/zte/arthur/prebuilt/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so
 
 
 #Boot Animation
 PRODUCT_COPY_FILES +=\
     device/zte/arthur/prebuilt/media/bootanimation.zip:system/media/bootanimation.zip
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.android.dateformat=dd-MM-yyyy \
-    ro.build.baseband_version=129005 \
-    ro.telephony.default_network=0 \
-    ro.telephony.call_ring.multiple=false \
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libril-qc-1.so \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=15 \
-    ro.com.android.dataroaming=false
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=240 \
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.hwfeature_slavecamera=yes \
-    ro.config.hwcameraset=63 \
-    hw.secondary_mic=0 \
-    ro.config.hw_addsettingsdbex=1 \
-    ro.config.hw_gcf_mms=true \
-    ro.config.wifi_chip_is_bcm=false \
-    ro.config.hwft_PNN_function=true \
-    persist.cust.tel.adapt=1 \
-    persist.cust.tel.eons=1 \
-    ro.config.hwfeature_gps_test=0 \
-    ro.config.hwfeature_ecc=true \
-    ro.config.lowbattery_shutdown=1 \
-    ro.config.hwfeature_wakeupkey=1 \
-    ro.config.endkeybehavior=true \
-    ro.config.hw_menu_unlockscreen=false \
-    ro.media.enc.lprof.duration=30 \
-    ro.config.PicMaxSize=5mp \
-    ro.config.hw_temperature_warn=true \
-    ro.config.hw_clocksetting=0 \
-    mot.proximity.delay=150 \
-    ro.additionalmounts=/HWUserData \
-    ro.vold.switchablepair=/mnt/sdcard,/HWUserData \
-    ro.vold.umsdirtyratio=20 \
-
-# This should not be needed but on-screen keyboard uses the wrong density without it.
-PRODUCT_PROPERTY_OVERRIDES += \
-    qemu.sf.lcd_density=240
- 
-# arthur uses high-density artwork where available
-PRODUCT_LOCALES += hdpi
-
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.locationfeatures=1 \
-    ro.media.dec.jpeg.memcap=20000000 \
-    dalvik.vm.lockprof.threshold=500 \
-    dalvik.vm.dexopt-flags=m=y \
-    dalvik.vm.heapsize=32m \
-    dalvik.vm.execution-mode=int:jit \
-    dalvik.vm.dexopt-data-only=1 \
-    ro.opengles.version=131072  \
-    ro.compcache.default=0
-
-# common msm7x30 configs
-$(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
-
-# libcamera
-$(call inherit-product, device/zte/arthur/libcamera/Android.mk)
-
-#system patch  from prebuilt
-PRODUCT_COPY_FILES += \
-    device/zte/arthur/prebuilt/lib/libaudioalsa.so:/system/lib/libaudioalsa.so \
-    device/zte/arthur/prebuilt/lib/libmedia_jni.so:/system/lib/libmedia_jni.so \
-    device/zte/arthur/prebuilt/lib/libOmxVenc.so:/system/lib/libOmxVenc.so \
-    device/zte/arthur/prebuilt/lib/libOmxVdec.so:/system/lib/libOmxVdec.so \
-    device/zte/arthur/prebuilt/lib/libmm-omxcore.so:/system/lib/libmm-omxcore.so \
-    device/zte/arthur/prebuilt/lib/libOmxCore.so:/system/lib/libOmxCore.so \
-    device/zte/arthur/prebuilt/lib/liboverlay.so:/system/lib/liboverlay.so \
-    device/zte/arthur/prebuilt/lib/hw/overlay.default.so:/system/lib/hw/overlay.default.so \
-    device/zte/arthur/prebuilt/lib/libstagefright_color_conversion.so:/system/lib/libstagefright_color_conversion.so \
-    device/zte/arthur/prebuilt/lib/libstagefright_foundation.so:/system/lib/libstagefright_foundation.so \
-    device/zte/arthur/prebuilt/lib/libstagefrighthw.so:/system/lib/libstagefrighthw.so \
-    device/zte/arthur/prebuilt/lib/libstagefright_omx.so:/system/lib/libstagefright_omx.so \
-    device/zte/arthur/prebuilt/lib/libstagefright.so:/system/lib/libstagefright.so
 
 PRODUCT_NAME := ZTE_Warp
 PRODUCT_BRAND := ZTE
 PRODUCT_DEVICE := arthur
 PRODUCT_MODEL := N860
 PRODUCT_MANUFACTURER := ZTE
-
-
